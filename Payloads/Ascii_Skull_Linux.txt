@@ -1,0 +1,40 @@
+REM TITLE: Ascii Skull Linux
+REM AUTHOR: OSINTI4L
+REM TARGET OS: Linux
+REM DESCRIPTION: Opens a text editor and writes ascii skull art. Text editor must be in full screen and have automatic indentation disabled.
+
+ATTACKMODE HID
+DELAY 1000
+
+INJECT_MOD
+	GUI
+DELAY 200
+	STRINGLN text editor
+DELAY 200
+
+STRINGLN                  uuuuuuu
+STRINGLN              uu$$$$$$$$$$$uu
+STRINGLN           uu$$$$$$$$$$$$$$$$$uu
+STRINGLN          u$$$$$$$$$$$$$$$$$$$$$u
+STRINGLN         u$$$$$$$$$$$$$$$$$$$$$$$u
+STRINGLN        u$$$$$$$$$$$$$$$$$$$$$$$$$u
+STRINGLN        u$$$$$$$$$$$$$$$$$$$$$$$$$u
+STRINGLN        u$$$$$$"   "$$$"   "$$$$$$u
+STRINGLN        "$$$$"      u$u       $$$$"
+STRINGLN         $$$u       u$u       u$$$
+STRINGLN         $$$u      u$$$u      u$$$
+STRINGLN          "$$$$uu$$$   $$$uu$$$$"
+STRINGLN           "$$$$$$$"   "$$$$$$$"
+STRINGLN             u$$$$$$$u$$$$$$$u
+STRINGLN              u$"$"$"$"$"$"$u
+STRINGLN   uuu        $$u$ $ $ $ $u$$       uuu
+STRINGLN  u$$$$        $$$$$u$u$u$$$       u$$$$
+STRINGLN   $$$$$uu      "$$$$$$$$$"     uu$$$$$$
+STRINGLN u$$$$$$$$$$$uu    """""    uuuu$$$$$$$$$$
+STRINGLN $$$$"""$$$$$$$$$$uuu   uu$$$$$$$$$"""$$$"
+STRINGLN  """      ""$$$$$$$$$$$uu ""$"""
+STRINGLN            uuuu ""$$$$$$$$$$uuu
+STRINGLN   u$$$uuu$$$$$$$$$uu ""$$$$$$$$$$$uuu$$$
+STRINGLN   $$$$$$$$$$""""           ""$$$$$$$$$$$"
+STRINGLN    "$$$$$"                      ""$$$$""
+STRINGLN      $$$"                         $$$$"
