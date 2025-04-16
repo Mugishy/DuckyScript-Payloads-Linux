@@ -4,7 +4,6 @@
 A collection of DuckyScript payloads targeting Linux systems.
 
 ![ducky2](https://github.com/user-attachments/assets/c51e766e-75bc-4b22-b444-1631bf88adde)
-![ducky1](https://github.com/user-attachments/assets/dc2f2f25-bc73-4882-ac7a-c662686c11e5)
 
 </div>
 
